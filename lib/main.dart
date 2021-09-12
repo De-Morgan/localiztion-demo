@@ -2,14 +2,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:localization/shared_pref.dart';
 import 'localization_helper.dart';
 import 'local_provider.dart';
+import 'supported_locale.dart';
 
-void main() {
-  runApp(ProviderScope(child: MyApp()));
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await AppSharedPreference.init();
+  runApp(ProviderScope(child: LocalizationDemo()));
+
 }
 
-class MyApp extends StatelessWidget {
+class LocalizationDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer(
@@ -62,7 +67,7 @@ class HomePage extends StatelessWidget {
                   .toList();
             },
             onSelected: (locale) {
-              context.read(supportedLocaleProvider).state = locale;
+              context.read(localeProvider.notifier).changeLanguage(locale);
             },
           )
         ],

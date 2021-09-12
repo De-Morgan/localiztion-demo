@@ -29,6 +29,7 @@ dependencies:
 
 
   flutter_riverpod: ^0.14.0+3
+  shared_preferences: ^2.0.7
 
 
 dev_dependencies:
